@@ -1,6 +1,6 @@
 import {ProtractorPlugin} from 'protractor';
 
-const protractorInflux: ProtractorPlugin | any = {
+const protractorPg: ProtractorPlugin | any = {
     postTest(passed: boolean, testInfo: any): void {
         console.log("Passou: ", passed);
         console.log("Info: ", testInfo);
@@ -10,4 +10,4 @@ const protractorInflux: ProtractorPlugin | any = {
     }
 }
 
-export = protractorInflux;
+export = protractorPg;
