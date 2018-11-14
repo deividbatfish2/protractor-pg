@@ -36,23 +36,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var Projeto_1 = require("../entity/Projeto");
 var project_singletom_1 = require("../model/project.singletom");
-var cenario_repository_1 = require("../repository/cenario.repository");
 var Cenario_1 = require("../entity/Cenario");
-var configConnection_1 = require("../connection/configConnection");
 var ProjetoService_1 = require("../service/ProjetoService");
+var CenarioService_1 = require("../service/CenarioService");
 var protractorPg = {
     postTest: function (passed, testInfo) {
         return __awaiter(this, void 0, void 0, function () {
-            var cenarioRepositorio, cenario;
+            var cenarioService, cenario;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, configConnection_1.ConfigConnection.getNewConnection()];
-                    case 1:
-                        _a.sent();
-                        cenarioRepositorio = new cenario_repository_1.CenarioRepository();
+                    case 0:
+                        cenarioService = new CenarioService_1.CenarioService();
                         cenario = new Cenario_1.Cenario(testInfo.name, project_singletom_1.ProjectSingleton.getDefault());
-                        return [4 /*yield*/, cenarioRepositorio.save(cenario)];
-                    case 2:
+                        return [4 /*yield*/, cenarioService.criaCenarioseNaoExiste(cenario)];
+                    case 1:
                         _a.sent();
                         return [2 /*return*/];
                 }
@@ -71,7 +68,6 @@ var protractorPg = {
                         return [4 /*yield*/, projetoService.criarProjetoSeNaoExiste(projeto)];
                     case 1:
                         _a.default = (_b.sent()) || projeto;
-                        console.log(project_singletom_1.ProjectSingleton.getDefault());
                         return [2 /*return*/];
                 }
             });

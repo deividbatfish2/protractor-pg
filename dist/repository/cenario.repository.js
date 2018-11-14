@@ -9,6 +9,9 @@ var CenarioRepository = /** @class */ (function () {
     CenarioRepository.prototype.save = function (cenario) {
         return this.repository.save(cenario);
     };
+    CenarioRepository.prototype.findOne = function (cenario) {
+        return this.repository.findOne({ descricao: cenario.descricao });
+    };
     return CenarioRepository;
 }());
 exports.CenarioRepository = CenarioRepository;

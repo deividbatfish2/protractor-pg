@@ -12,4 +12,8 @@ export class CenarioRepository {
     save(cenario: Cenario): Promise<Cenario> {
         return this.repository.save(cenario);
     }
+
+    findOne(cenario: Cenario): Promise<Cenario | undefined> {
+        return this.repository.findOne({descricao: cenario.descricao})
+    }
 }
