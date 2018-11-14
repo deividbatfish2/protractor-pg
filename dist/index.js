@@ -1,11 +1,6 @@
 "use strict";
-var protractorInflux = {
-    postTest: function (passed, testInfo) {
-        console.log("Passou: ", passed);
-        console.log("Info: ", testInfo);
-    },
-    initializer: function (projectName, ipInfluxDB, portaInfluxDB) {
-        console.log("Primeiro export");
-    }
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-module.exports = protractorInflux;
+var plugin_1 = __importDefault(require("./Plugin/plugin"));
+module.exports = plugin_1.default;
