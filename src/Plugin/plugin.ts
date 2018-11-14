@@ -5,17 +5,16 @@ import { ProjectSingleton } from '../model/project.singletom';
 import { CenarioRepository } from '../repository/cenario.repository';
 import { Cenario } from '../entity/Cenario';
 import { ConfigConnection } from '../connection/configConnection';
+import {Info} from '../model/info'
 
 const protractorPg: ProtractorPlugin | any = {
-    async postTest(passed: boolean, testInfo: any): Promise<void> {
+    async postTest(passed: boolean, testInfo: Info): Promise<void> {
         const configConnection = new ConfigConnection()
         await configConnection.getNewConnection()
         const cenarioRepositorio = new CenarioRepository();
-        const cenario = new Cenario("Emissão de notas para RJ", ProjectSingleton.getDefault());
-        let teste = await cenarioRepositorio.save(cenario);
+        const cenario = new Cenario(testInfo.name, ProjectSingleton.getDefault());
+        await cenarioRepositorio.save(cenario);
         await configConnection.closeConnection()
-        console.log("Passou: ", passed);
-        console.log("Info: ", testInfo);
     },
     async initializer(projectName: string, descricao: string): Promise<void> {
         const configConnection = new ConfigConnection()

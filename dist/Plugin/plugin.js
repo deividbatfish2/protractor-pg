@@ -43,7 +43,7 @@ var configConnection_1 = require("../connection/configConnection");
 var protractorPg = {
     postTest: function (passed, testInfo) {
         return __awaiter(this, void 0, void 0, function () {
-            var configConnection, cenarioRepositorio, cenario, teste;
+            var configConnection, cenarioRepositorio, cenario;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -52,15 +52,13 @@ var protractorPg = {
                     case 1:
                         _a.sent();
                         cenarioRepositorio = new cenario_repository_1.CenarioRepository();
-                        cenario = new Cenario_1.Cenario("Emissão de notas para RJ", project_singletom_1.ProjectSingleton.getDefault());
+                        cenario = new Cenario_1.Cenario(testInfo.name, project_singletom_1.ProjectSingleton.getDefault());
                         return [4 /*yield*/, cenarioRepositorio.save(cenario)];
                     case 2:
-                        teste = _a.sent();
+                        _a.sent();
                         return [4 /*yield*/, configConnection.closeConnection()];
                     case 3:
                         _a.sent();
-                        console.log("Passou: ", passed);
-                        console.log("Info: ", testInfo);
                         return [2 /*return*/];
                 }
             });
