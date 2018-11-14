@@ -16,10 +16,10 @@ export class ConfigConnection {
             database: "pluginteste",
             logging: true,
             entities: [
-                "dist/entity/**/*.js"
+                "./**/dist/entity/**/*.js"
             ],
             migrations: [
-                "../migration/**/*.js"
+                "./**/dist/migration/**/*.js"
             ],
             cli: {
                 migrationsDir: "../src/migration"
