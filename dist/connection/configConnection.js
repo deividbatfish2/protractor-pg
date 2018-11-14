@@ -34,62 +34,50 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var projeto_repository_1 = require("../repository/projeto.repository");
-var Projeto_1 = require("../entity/Projeto");
-var project_singletom_1 = require("../model/project.singletom");
-var cenario_repository_1 = require("../repository/cenario.repository");
-var Cenario_1 = require("../entity/Cenario");
-var configConnection_1 = require("../connection/configConnection");
-var protractorPg = {
-    postTest: function (passed, testInfo) {
-        return __awaiter(this, void 0, void 0, function () {
-            var configConnection, cenarioRepositorio, cenario, teste;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        console.log("aqui 2");
-                        configConnection = new configConnection_1.ConfigConnection();
-                        return [4 /*yield*/, configConnection.getNewConnection()];
-                    case 1:
-                        _a.sent();
-                        cenarioRepositorio = new cenario_repository_1.CenarioRepository();
-                        cenario = new Cenario_1.Cenario("Emissão de notas para RJ", project_singletom_1.ProjectSingleton.getDefault());
-                        return [4 /*yield*/, cenarioRepositorio.save(cenario)];
-                    case 2:
-                        teste = _a.sent();
-                        return [4 /*yield*/, configConnection.closeConnection()];
-                    case 3:
-                        _a.sent();
-                        console.log(teste);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    },
-    initializer: function (projectName, descricao) {
-        return __awaiter(this, void 0, void 0, function () {
-            var configConnection, projetoRepositorio, projeto, projetoCriado;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        configConnection = new configConnection_1.ConfigConnection();
-                        return [4 /*yield*/, configConnection.getNewConnection()];
-                    case 1:
-                        _a.sent();
-                        projetoRepositorio = new projeto_repository_1.ProjetoRepository();
-                        projeto = new Projeto_1.Projeto(projectName, descricao);
-                        return [4 /*yield*/, projetoRepositorio.save(projeto)];
-                    case 2:
-                        projetoCriado = _a.sent();
-                        return [4 /*yield*/, configConnection.closeConnection()];
-                    case 3:
-                        _a.sent();
-                        project_singletom_1.ProjectSingleton.default = projetoCriado;
-                        console.log("aqui 1");
-                        return [2 /*return*/];
-                }
-            });
-        });
+Object.defineProperty(exports, "__esModule", { value: true });
+var typeorm_1 = require("typeorm");
+var ConfigConnection = /** @class */ (function () {
+    function ConfigConnection() {
     }
-};
-module.exports = protractorPg;
+    ConfigConnection.prototype.getNewConnection = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = this;
+                        return [4 /*yield*/, typeorm_1.createConnection({
+                                type: "postgres",
+                                host: "localhost",
+                                port: 5432,
+                                username: "root",
+                                password: "admin",
+                                database: "pluginteste",
+                                logging: true,
+                                entities: [
+                                    "dist/entity/**/*.js"
+                                ],
+                                migrations: [
+                                    "../migration/**/*.js"
+                                ],
+                                cli: {
+                                    migrationsDir: "../src/migration"
+                                }
+                            })];
+                    case 1:
+                        _a.connection = _b.sent();
+                        return [2 /*return*/, this.connection];
+                }
+            });
+        });
+    };
+    ConfigConnection.prototype.closeConnection = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.connection.close()];
+            });
+        });
+    };
+    return ConfigConnection;
+}());
+exports.ConfigConnection = ConfigConnection;
