@@ -39,12 +39,13 @@ var typeorm_1 = require("typeorm");
 var ConfigConnection = /** @class */ (function () {
     function ConfigConnection() {
     }
-    ConfigConnection.prototype.getNewConnection = function () {
+    ConfigConnection.getNewConnection = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        if (!!this.connection) return [3 /*break*/, 2];
                         _a = this;
                         return [4 /*yield*/, typeorm_1.createConnection({
                                 type: "postgres",
@@ -66,12 +67,13 @@ var ConfigConnection = /** @class */ (function () {
                             })];
                     case 1:
                         _a.connection = _b.sent();
-                        return [2 /*return*/, this.connection];
+                        _b.label = 2;
+                    case 2: return [2 /*return*/, this.connection];
                 }
             });
         });
     };
-    ConfigConnection.prototype.closeConnection = function () {
+    ConfigConnection.closeConnection = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.connection.close()];

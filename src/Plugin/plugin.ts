@@ -10,12 +10,12 @@ import { ProjetoService } from '../service/ProjetoService';
 
 const protractorPg: ProtractorPlugin | any = {
     async postTest(passed: boolean, testInfo: Info): Promise<void> {
-        const configConnection = new ConfigConnection()
-        await configConnection.getNewConnection()
+
+        await ConfigConnection.getNewConnection()
         const cenarioRepositorio = new CenarioRepository();
         const cenario = new Cenario(testInfo.name, ProjectSingleton.getDefault());
         await cenarioRepositorio.save(cenario);
-        await configConnection.closeConnection()
+
     },
     async initializer(projectName: string, descricao: string): Promise<void> {
 

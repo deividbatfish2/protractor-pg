@@ -5,15 +5,11 @@ import { ConfigConnection } from "../connection/configConnection";
 export class ProjetoService {
 
     private projetoRepository: ProjetoRepository;
-    private configConnection: ConfigConnection;
-
-    constructor() {
-        this.configConnection = new ConfigConnection();      
-    }
 
     async criarProjetoSeNaoExiste(projeto: Projeto): Promise<Projeto | undefined> {
         const existe = await this.projetoExiste(projeto);
-        await this.configConnection.getNewConnection();
+
+        await ConfigConnection.getNewConnection();
         this.projetoRepository = new ProjetoRepository();
         
         if(!existe) {
@@ -22,15 +18,15 @@ export class ProjetoService {
         }
 
         const projetoExistente = await this.projetoRepository.findOne(projeto)
-        await this.configConnection.closeConnection();
+
         return projetoExistente
     }
 
     private async projetoExiste(projeto: Projeto): Promise<boolean> {
-        await this.configConnection.getNewConnection();
+
+        await ConfigConnection.getNewConnection();
         this.projetoRepository = new ProjetoRepository();
         const existe = await this.projetoRepository.findOne(projeto);
-        await this.configConnection.closeConnection();
         if(existe) {
             return true
         }

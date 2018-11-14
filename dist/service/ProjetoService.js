@@ -39,7 +39,6 @@ var projeto_repository_1 = require("../repository/projeto.repository");
 var configConnection_1 = require("../connection/configConnection");
 var ProjetoService = /** @class */ (function () {
     function ProjetoService() {
-        this.configConnection = new configConnection_1.ConfigConnection();
     }
     ProjetoService.prototype.criarProjetoSeNaoExiste = function (projeto) {
         return __awaiter(this, void 0, void 0, function () {
@@ -49,7 +48,7 @@ var ProjetoService = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.projetoExiste(projeto)];
                     case 1:
                         existe = _a.sent();
-                        return [4 /*yield*/, this.configConnection.getNewConnection()];
+                        return [4 /*yield*/, configConnection_1.ConfigConnection.getNewConnection()];
                     case 2:
                         _a.sent();
                         this.projetoRepository = new projeto_repository_1.ProjetoRepository();
@@ -61,9 +60,6 @@ var ProjetoService = /** @class */ (function () {
                     case 4: return [4 /*yield*/, this.projetoRepository.findOne(projeto)];
                     case 5:
                         projetoExistente = _a.sent();
-                        return [4 /*yield*/, this.configConnection.closeConnection()];
-                    case 6:
-                        _a.sent();
                         return [2 /*return*/, projetoExistente];
                 }
             });
@@ -74,16 +70,13 @@ var ProjetoService = /** @class */ (function () {
             var existe;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.configConnection.getNewConnection()];
+                    case 0: return [4 /*yield*/, configConnection_1.ConfigConnection.getNewConnection()];
                     case 1:
                         _a.sent();
                         this.projetoRepository = new projeto_repository_1.ProjetoRepository();
                         return [4 /*yield*/, this.projetoRepository.findOne(projeto)];
                     case 2:
                         existe = _a.sent();
-                        return [4 /*yield*/, this.configConnection.closeConnection()];
-                    case 3:
-                        _a.sent();
                         if (existe) {
                             return [2 /*return*/, true];
                         }

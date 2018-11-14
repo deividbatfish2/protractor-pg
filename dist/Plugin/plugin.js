@@ -43,21 +43,16 @@ var ProjetoService_1 = require("../service/ProjetoService");
 var protractorPg = {
     postTest: function (passed, testInfo) {
         return __awaiter(this, void 0, void 0, function () {
-            var configConnection, cenarioRepositorio, cenario;
+            var cenarioRepositorio, cenario;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        configConnection = new configConnection_1.ConfigConnection();
-                        return [4 /*yield*/, configConnection.getNewConnection()];
+                    case 0: return [4 /*yield*/, configConnection_1.ConfigConnection.getNewConnection()];
                     case 1:
                         _a.sent();
                         cenarioRepositorio = new cenario_repository_1.CenarioRepository();
                         cenario = new Cenario_1.Cenario(testInfo.name, project_singletom_1.ProjectSingleton.getDefault());
                         return [4 /*yield*/, cenarioRepositorio.save(cenario)];
                     case 2:
-                        _a.sent();
-                        return [4 /*yield*/, configConnection.closeConnection()];
-                    case 3:
                         _a.sent();
                         return [2 /*return*/];
                 }
