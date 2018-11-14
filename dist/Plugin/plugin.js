@@ -34,12 +34,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var projeto_repository_1 = require("../repository/projeto.repository");
 var Projeto_1 = require("../entity/Projeto");
 var project_singletom_1 = require("../model/project.singletom");
 var cenario_repository_1 = require("../repository/cenario.repository");
 var Cenario_1 = require("../entity/Cenario");
 var configConnection_1 = require("../connection/configConnection");
+var ProjetoService_1 = require("../service/ProjetoService");
 var protractorPg = {
     postTest: function (passed, testInfo) {
         return __awaiter(this, void 0, void 0, function () {
@@ -66,23 +66,17 @@ var protractorPg = {
     },
     initializer: function (projectName, descricao) {
         return __awaiter(this, void 0, void 0, function () {
-            var configConnection, projetoRepositorio, projeto, projetoCriado;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var projetoService, projeto, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        configConnection = new configConnection_1.ConfigConnection();
-                        return [4 /*yield*/, configConnection.getNewConnection()];
-                    case 1:
-                        _a.sent();
-                        projetoRepositorio = new projeto_repository_1.ProjetoRepository();
+                        projetoService = new ProjetoService_1.ProjetoService();
                         projeto = new Projeto_1.Projeto(projectName, descricao);
-                        return [4 /*yield*/, projetoRepositorio.save(projeto)];
-                    case 2:
-                        projetoCriado = _a.sent();
-                        return [4 /*yield*/, configConnection.closeConnection()];
-                    case 3:
-                        _a.sent();
-                        project_singletom_1.ProjectSingleton.default = projetoCriado;
+                        _a = project_singletom_1.ProjectSingleton;
+                        return [4 /*yield*/, projetoService.criarProjetoSeNaoExiste(projeto)];
+                    case 1:
+                        _a.default = (_b.sent()) || projeto;
+                        console.log(project_singletom_1.ProjectSingleton.getDefault());
                         return [2 /*return*/];
                 }
             });

@@ -6,6 +6,7 @@ import { CenarioRepository } from '../repository/cenario.repository';
 import { Cenario } from '../entity/Cenario';
 import { ConfigConnection } from '../connection/configConnection';
 import {Info} from '../model/info'
+import { ProjetoService } from '../service/ProjetoService';
 
 const protractorPg: ProtractorPlugin | any = {
     async postTest(passed: boolean, testInfo: Info): Promise<void> {
@@ -17,13 +18,12 @@ const protractorPg: ProtractorPlugin | any = {
         await configConnection.closeConnection()
     },
     async initializer(projectName: string, descricao: string): Promise<void> {
-        const configConnection = new ConfigConnection()
-        await configConnection.getNewConnection()
-        const projetoRepositorio = new ProjetoRepository();
-        let projeto = new Projeto(projectName, descricao);
-        let projetoCriado = await projetoRepositorio.save(projeto);
-        await configConnection.closeConnection();
-        ProjectSingleton.default = projetoCriado;
+
+        const projetoService = new ProjetoService()
+        const projeto = new Projeto(projectName, descricao);
+
+        ProjectSingleton.default = await projetoService.criarProjetoSeNaoExiste(projeto) || projeto;
+        console.log(ProjectSingleton.getDefault())
     }
 }
 

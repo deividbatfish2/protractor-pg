@@ -13,5 +13,9 @@ export class ProjetoRepository {
         return this.repository.save(projeto);
     }
 
+    public findOne(projeto: Projeto): Promise<Projeto | undefined> {
+        return this.repository.findOne({nome: projeto.nome});
+    }
+
 
 }

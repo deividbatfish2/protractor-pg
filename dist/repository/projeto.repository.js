@@ -9,6 +9,9 @@ var ProjetoRepository = /** @class */ (function () {
     ProjetoRepository.prototype.save = function (projeto) {
         return this.repository.save(projeto);
     };
+    ProjetoRepository.prototype.findOne = function (projeto) {
+        return this.repository.findOne({ nome: projeto.nome });
+    };
     return ProjetoRepository;
 }());
 exports.ProjetoRepository = ProjetoRepository;
