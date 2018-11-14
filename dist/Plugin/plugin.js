@@ -47,7 +47,6 @@ var protractorPg = {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("aqui 2");
                         configConnection = new configConnection_1.ConfigConnection();
                         return [4 /*yield*/, configConnection.getNewConnection()];
                     case 1:
@@ -60,7 +59,8 @@ var protractorPg = {
                         return [4 /*yield*/, configConnection.closeConnection()];
                     case 3:
                         _a.sent();
-                        console.log(teste);
+                        console.log("Passou: ", passed);
+                        console.log("Info: ", testInfo);
                         return [2 /*return*/];
                 }
             });
@@ -85,7 +85,6 @@ var protractorPg = {
                     case 3:
                         _a.sent();
                         project_singletom_1.ProjectSingleton.default = projetoCriado;
-                        console.log("aqui 1");
                         return [2 /*return*/];
                 }
             });

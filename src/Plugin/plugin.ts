@@ -8,16 +8,14 @@ import { ConfigConnection } from '../connection/configConnection';
 
 const protractorPg: ProtractorPlugin | any = {
     async postTest(passed: boolean, testInfo: any): Promise<void> {
-        console.log("aqui 2")
         const configConnection = new ConfigConnection()
         await configConnection.getNewConnection()
         const cenarioRepositorio = new CenarioRepository();
         const cenario = new Cenario("Emissão de notas para RJ", ProjectSingleton.getDefault());
         let teste = await cenarioRepositorio.save(cenario);
         await configConnection.closeConnection()
-        console.log(teste)
-        /*console.log("Passou: ", passed);
-        console.log("Info: ", testInfo);*/
+        console.log("Passou: ", passed);
+        console.log("Info: ", testInfo);
     },
     async initializer(projectName: string, descricao: string): Promise<void> {
         const configConnection = new ConfigConnection()
@@ -27,7 +25,6 @@ const protractorPg: ProtractorPlugin | any = {
         let projetoCriado = await projetoRepositorio.save(projeto);
         await configConnection.closeConnection();
         ProjectSingleton.default = projetoCriado;
-        console.log("aqui 1")
     }
 }
 
