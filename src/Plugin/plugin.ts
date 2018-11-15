@@ -5,13 +5,20 @@ import { Cenario } from '../entity/Cenario';
 import {Info} from '../model/info'
 import { ProjetoService } from '../service/ProjetoService';
 import { CenarioService } from '../service/CenarioService';
+import { StepService } from '../service/StepService';
+import { Step } from '../entity/Step';
 
 const protractorPg: ProtractorPlugin | any = {
     async postTest(passed: boolean, testInfo: Info): Promise<void> {
 
         const cenarioService = new CenarioService();
         const cenario = new Cenario(testInfo.name, ProjectSingleton.getDefault());
-        await cenarioService.criaCenarioseNaoExiste(cenario);
+        const cenarioCriado = await cenarioService.criaCenarioseNaoExiste(cenario) || cenario;
+
+        const stepService = new StepService();
+        const result = passed? "SIM":"NAO";
+        const step = new Step(testInfo.category, result, cenarioCriado);
+        await stepService.criaStepseNaoExiste(step);
     },
     async initializer(projectName: string, descricao: string): Promise<void> {
 

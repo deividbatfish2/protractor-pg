@@ -9,6 +9,9 @@ var StepRepository = /** @class */ (function () {
     StepRepository.prototype.save = function (step) {
         return this.repository.save(step);
     };
+    StepRepository.prototype.findOne = function (step) {
+        return this.repository.findOne({ nome: step.nome });
+    };
     return StepRepository;
 }());
 exports.StepRepository = StepRepository;

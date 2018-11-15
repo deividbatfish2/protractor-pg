@@ -34,52 +34,57 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var Projeto_1 = require("../entity/Projeto");
-var project_singletom_1 = require("../model/project.singletom");
-var Cenario_1 = require("../entity/Cenario");
-var ProjetoService_1 = require("../service/ProjetoService");
-var CenarioService_1 = require("../service/CenarioService");
-var StepService_1 = require("../service/StepService");
-var Step_1 = require("../entity/Step");
-var protractorPg = {
-    postTest: function (passed, testInfo) {
+Object.defineProperty(exports, "__esModule", { value: true });
+var step_repository_1 = require("../repository/step.repository");
+var configConnection_1 = require("../connection/configConnection");
+var StepService = /** @class */ (function () {
+    function StepService() {
+    }
+    StepService.prototype.criaStepseNaoExiste = function (step) {
         return __awaiter(this, void 0, void 0, function () {
-            var cenarioService, cenario, cenarioCriado, stepService, result, step;
+            var existe, stepCriado, stepExistente;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        cenarioService = new CenarioService_1.CenarioService();
-                        cenario = new Cenario_1.Cenario(testInfo.name, project_singletom_1.ProjectSingleton.getDefault());
-                        return [4 /*yield*/, cenarioService.criaCenarioseNaoExiste(cenario)];
+                    case 0: return [4 /*yield*/, this.existeStep(step)];
                     case 1:
-                        cenarioCriado = (_a.sent()) || cenario;
-                        stepService = new StepService_1.StepService();
-                        result = passed ? "SIM" : "NAO";
-                        step = new Step_1.Step(testInfo.category, result, cenarioCriado);
-                        return [4 /*yield*/, stepService.criaStepseNaoExiste(step)];
+                        existe = _a.sent();
+                        return [4 /*yield*/, configConnection_1.ConfigConnection.getNewConnection()];
                     case 2:
                         _a.sent();
-                        return [2 /*return*/];
+                        this.stepRepository = new step_repository_1.StepRepository();
+                        if (!!existe) return [3 /*break*/, 4];
+                        return [4 /*yield*/, this.stepRepository.save(step)];
+                    case 3:
+                        stepCriado = _a.sent();
+                        return [2 /*return*/, stepCriado];
+                    case 4: return [4 /*yield*/, this.stepRepository.findOne(step)];
+                    case 5:
+                        stepExistente = _a.sent();
+                        return [2 /*return*/, stepExistente];
                 }
             });
         });
-    },
-    initializer: function (projectName, descricao) {
+    };
+    StepService.prototype.existeStep = function (step) {
         return __awaiter(this, void 0, void 0, function () {
-            var projetoService, projeto, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        projetoService = new ProjetoService_1.ProjetoService();
-                        projeto = new Projeto_1.Projeto(projectName, descricao);
-                        _a = project_singletom_1.ProjectSingleton;
-                        return [4 /*yield*/, projetoService.criarProjetoSeNaoExiste(projeto)];
+            var stepExiste;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, configConnection_1.ConfigConnection.getNewConnection()];
                     case 1:
-                        _a.default = (_b.sent()) || projeto;
-                        return [2 /*return*/];
+                        _a.sent();
+                        this.stepRepository = new step_repository_1.StepRepository();
+                        return [4 /*yield*/, this.stepRepository.findOne(step)];
+                    case 2:
+                        stepExiste = _a.sent();
+                        if (!stepExiste) {
+                            return [2 /*return*/, false];
+                        }
+                        return [2 /*return*/, true];
                 }
             });
         });
-    }
-};
-module.exports = protractorPg;
+    };
+    return StepService;
+}());
+exports.StepService = StepService;

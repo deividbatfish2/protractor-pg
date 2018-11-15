@@ -16,4 +16,9 @@ export class Step {
     @ManyToOne(type => Cenario, cenario => cenario.steps)
     cenario: Cenario;
 
+    constructor(nome: string, resultado: string, cenario: Cenario) {
+        this.nome = nome;
+        this.resultado = resultado;
+        this.cenario = cenario;
+    }
 }

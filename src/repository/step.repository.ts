@@ -12,4 +12,8 @@ export class StepRepository {
     save(step: Step): Promise<Step> {
         return this.repository.save(step);
     }
+
+    findOne(step: Step): Promise<Step | undefined> {
+        return this.repository.findOne({nome: step.nome});
+    } 
 }

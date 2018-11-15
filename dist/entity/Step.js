@@ -12,7 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
 var Cenario_1 = require("./Cenario");
 var Step = /** @class */ (function () {
-    function Step() {
+    function Step(nome, resultado, cenario) {
+        this.nome = nome;
+        this.resultado = resultado;
+        this.cenario = cenario;
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
@@ -31,7 +34,8 @@ var Step = /** @class */ (function () {
         __metadata("design:type", Cenario_1.Cenario)
     ], Step.prototype, "cenario", void 0);
     Step = __decorate([
-        typeorm_1.Entity()
+        typeorm_1.Entity(),
+        __metadata("design:paramtypes", [String, String, Cenario_1.Cenario])
     ], Step);
     return Step;
 }());
