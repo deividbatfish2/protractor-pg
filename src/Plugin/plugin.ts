@@ -12,12 +12,12 @@ const protractorPg: ProtractorPlugin | any = {
     async postTest(passed: boolean, testInfo: Info): Promise<void> {
 
         const cenarioService = new CenarioService();
-        const cenario = new Cenario(testInfo.name, ProjectSingleton.getDefault());
+        const cenario = new Cenario(testInfo.category, ProjectSingleton.getDefault());
         const cenarioCriado = await cenarioService.criaCenarioseNaoExiste(cenario) || cenario;
 
         const stepService = new StepService();
         const result = passed? "SIM":"NAO";
-        const step = new Step(testInfo.category, result, cenarioCriado);
+        const step = new Step(testInfo.name, result, cenarioCriado);
         await stepService.criaStepseNaoExiste(step);
     },
     async initializer(projectName: string, descricao: string): Promise<void> {

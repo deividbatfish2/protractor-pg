@@ -49,13 +49,13 @@ var protractorPg = {
                 switch (_a.label) {
                     case 0:
                         cenarioService = new CenarioService_1.CenarioService();
-                        cenario = new Cenario_1.Cenario(testInfo.name, project_singletom_1.ProjectSingleton.getDefault());
+                        cenario = new Cenario_1.Cenario(testInfo.category, project_singletom_1.ProjectSingleton.getDefault());
                         return [4 /*yield*/, cenarioService.criaCenarioseNaoExiste(cenario)];
                     case 1:
                         cenarioCriado = (_a.sent()) || cenario;
                         stepService = new StepService_1.StepService();
                         result = passed ? "SIM" : "NAO";
-                        step = new Step_1.Step(testInfo.category, result, cenarioCriado);
+                        step = new Step_1.Step(testInfo.name, result, cenarioCriado);
                         return [4 /*yield*/, stepService.criaStepseNaoExiste(step)];
                     case 2:
                         _a.sent();
