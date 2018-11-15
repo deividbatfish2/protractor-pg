@@ -1,8 +1,9 @@
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm';
 import { Cenario } from './Cenario';
+import { BaseEntity } from './base/BaseEntity';
 
 @Entity()
-export class Projeto {
+export class Projeto extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -17,6 +18,7 @@ export class Projeto {
     cenarios: Array<Cenario>;
 
     constructor(nome: string, descricao: string) {
+        super()
         this.nome = nome;
         this.descricao = descricao;
     }

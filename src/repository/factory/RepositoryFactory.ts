@@ -5,10 +5,11 @@ import { CenarioRepository } from "../cenario.repository";
 import { Step } from "../../entity/Step";
 import { StepRepository } from "../step.repository";
 import { ConfigConnection } from "../../connection/configConnection";
+import { BaseEntity } from "../../entity/base/BaseEntity";
 
 export class RepositoryFactory {
 
-    static async getRepository(entity: any) {
+    static async getRepository(entity: BaseEntity) {
 
         await ConfigConnection.getNewConnection();
 

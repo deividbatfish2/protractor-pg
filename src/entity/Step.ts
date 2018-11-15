@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Cenario } from "./Cenario";
+import { BaseEntity } from "./base/BaseEntity";
 
 @Entity()
-export class Step {
+export class Step extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -17,6 +18,7 @@ export class Step {
     cenario: Cenario;
 
     constructor(nome: string, resultado: string, cenario: Cenario) {
+        super()
         this.nome = nome;
         this.resultado = resultado;
         this.cenario = cenario;

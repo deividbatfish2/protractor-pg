@@ -1,6 +1,7 @@
 import { RepositoryFactory } from "../../repository/factory/RepositoryFactory";
+import { BaseEntity } from "../../entity/base/BaseEntity";
 
-export abstract class BaseService<T> {
+export abstract class BaseService<T extends BaseEntity> {
     
     private repository: any;
 
