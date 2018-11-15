@@ -1,19 +1,4 @@
-import { Repository, getRepository } from "typeorm";
 import { Cenario } from "../entity/Cenario";
+import { BaseRepository } from "./base/BaseRepository";
 
-export class CenarioRepository {
-    
-    private repository: Repository<Cenario>;
-
-    constructor() {
-        this.repository = getRepository(Cenario)
-    }
-
-    save(cenario: Cenario): Promise<Cenario> {
-        return this.repository.save(cenario);
-    }
-
-    findOne(cenario: Cenario): Promise<Cenario | undefined> {
-        return this.repository.findOne({descricao: cenario.descricao})
-    }
-}
+export class CenarioRepository extends BaseRepository<Cenario> {}

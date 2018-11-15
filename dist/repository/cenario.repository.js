@@ -1,17 +1,24 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var Cenario_1 = require("../entity/Cenario");
-var CenarioRepository = /** @class */ (function () {
-    function CenarioRepository() {
-        this.repository = typeorm_1.getRepository(Cenario_1.Cenario);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
     }
-    CenarioRepository.prototype.save = function (cenario) {
-        return this.repository.save(cenario);
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
-    CenarioRepository.prototype.findOne = function (cenario) {
-        return this.repository.findOne({ descricao: cenario.descricao });
-    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var BaseRepository_1 = require("./base/BaseRepository");
+var CenarioRepository = /** @class */ (function (_super) {
+    __extends(CenarioRepository, _super);
+    function CenarioRepository() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
     return CenarioRepository;
-}());
+}(BaseRepository_1.BaseRepository));
 exports.CenarioRepository = CenarioRepository;

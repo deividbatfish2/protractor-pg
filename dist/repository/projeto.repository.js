@@ -1,17 +1,24 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Projeto_1 = require("../entity/Projeto");
-var typeorm_1 = require("typeorm");
-var ProjetoRepository = /** @class */ (function () {
-    function ProjetoRepository() {
-        this.repository = typeorm_1.getRepository(Projeto_1.Projeto);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
     }
-    ProjetoRepository.prototype.save = function (projeto) {
-        return this.repository.save(projeto);
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
-    ProjetoRepository.prototype.findOne = function (projeto) {
-        return this.repository.findOne({ nome: projeto.nome });
-    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var BaseRepository_1 = require("./base/BaseRepository");
+var ProjetoRepository = /** @class */ (function (_super) {
+    __extends(ProjetoRepository, _super);
+    function ProjetoRepository() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
     return ProjetoRepository;
-}());
+}(BaseRepository_1.BaseRepository));
 exports.ProjetoRepository = ProjetoRepository;

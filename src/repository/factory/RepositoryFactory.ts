@@ -15,11 +15,11 @@ export class RepositoryFactory {
 
         switch (entity.constructor) {
             case Projeto:
-                return new ProjetoRepository();
+                return new ProjetoRepository(entity);
             case Cenario:
-                return new CenarioRepository();
+                return new CenarioRepository(entity);
             case Step:
-                return new StepRepository();
+                return new StepRepository(entity);
 
             default: throw new Error("Entidade não Reconhecida")
         }

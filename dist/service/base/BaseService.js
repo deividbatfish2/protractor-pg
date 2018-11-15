@@ -53,7 +53,7 @@ var BaseService = /** @class */ (function () {
                     case 2:
                         _a.repository = _b.sent();
                         if (!!entidadeExistente) return [3 /*break*/, 4];
-                        return [4 /*yield*/, this.repository.save(this.entity)];
+                        return [4 /*yield*/, this.repository.save()];
                     case 3:
                         entidadeCriado = _b.sent();
                         return [2 /*return*/, entidadeCriado];

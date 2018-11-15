@@ -54,11 +54,11 @@ var RepositoryFactory = /** @class */ (function () {
                         _a.sent();
                         switch (entity.constructor) {
                             case Projeto_1.Projeto:
-                                return [2 /*return*/, new projeto_repository_1.ProjetoRepository()];
+                                return [2 /*return*/, new projeto_repository_1.ProjetoRepository(entity)];
                             case Cenario_1.Cenario:
-                                return [2 /*return*/, new cenario_repository_1.CenarioRepository()];
+                                return [2 /*return*/, new cenario_repository_1.CenarioRepository(entity)];
                             case Step_1.Step:
-                                return [2 /*return*/, new step_repository_1.StepRepository()];
+                                return [2 /*return*/, new step_repository_1.StepRepository(entity)];
                             default: throw new Error("Entidade não Reconhecida");
                         }
                         return [2 /*return*/];

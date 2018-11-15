@@ -1,5 +1,6 @@
 import { RepositoryFactory } from "../../repository/factory/RepositoryFactory";
 import { BaseEntity } from "../../entity/base/BaseEntity";
+import { BaseRepository } from "../../repository/base/BaseRepository";
 
 export abstract class BaseService<T extends BaseEntity> {
     
@@ -13,7 +14,7 @@ export abstract class BaseService<T extends BaseEntity> {
         this.repository = await RepositoryFactory.getRepository(this.entity);
 
         if(!entidadeExistente) {
-            const entidadeCriado =  await this.repository.save(this.entity);
+            const entidadeCriado =  await this.repository.save();
             return entidadeCriado;
         }
         return <T>entidadeExistente
