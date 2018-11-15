@@ -34,37 +34,38 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-var _this = this;
-var plugin_1 = __importDefault(require("./Plugin/plugin"));
-(function () { return __awaiter(_this, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, plugin_1.default.initializer("emissor", "descrição")];
-            case 1:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(true, { category: "teste 1", name: "teste 1 - step 1" })];
-            case 2:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(true, { category: "teste 1", name: "teste 1 - step 2" })];
-            case 3:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(false, { category: "teste 1", name: "teste 1 - step 3" })];
-            case 4:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(false, { category: "teste 2", name: "teste 2 - step 1" })];
-            case 5:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(true, { category: "teste 2", name: "teste 2 - step 2" })];
-            case 6:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(false, { category: "teste 2", name: "teste 2 - step 3" })];
-            case 7:
-                _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}); })();
-module.exports = plugin_1.default;
+Object.defineProperty(exports, "__esModule", { value: true });
+var Projeto_1 = require("../../entity/Projeto");
+var projeto_repository_1 = require("../projeto.repository");
+var Cenario_1 = require("../../entity/Cenario");
+var cenario_repository_1 = require("../cenario.repository");
+var Step_1 = require("../../entity/Step");
+var step_repository_1 = require("../step.repository");
+var configConnection_1 = require("../../connection/configConnection");
+var RepositoryFactory = /** @class */ (function () {
+    function RepositoryFactory() {
+    }
+    RepositoryFactory.getRepository = function (entity) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, configConnection_1.ConfigConnection.getNewConnection()];
+                    case 1:
+                        _a.sent();
+                        switch (entity.constructor) {
+                            case Projeto_1.Projeto:
+                                return [2 /*return*/, new projeto_repository_1.ProjetoRepository()];
+                            case Cenario_1.Cenario:
+                                return [2 /*return*/, new cenario_repository_1.CenarioRepository()];
+                            case Step_1.Step:
+                                return [2 /*return*/, new step_repository_1.StepRepository()];
+                            default: throw new Error("Entidade não Reconhecida");
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return RepositoryFactory;
+}());
+exports.RepositoryFactory = RepositoryFactory;

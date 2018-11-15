@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, Column, OneToMany } from "typeorm";
 import { Projeto } from "./Projeto";
 import { Step } from "./Step";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, Column, OneToMany } from "typeorm";
 
 @Entity()
 export class Cenario {

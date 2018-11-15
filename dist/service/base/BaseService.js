@@ -34,37 +34,55 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-var _this = this;
-var plugin_1 = __importDefault(require("./Plugin/plugin"));
-(function () { return __awaiter(_this, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, plugin_1.default.initializer("emissor", "descrição")];
-            case 1:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(true, { category: "teste 1", name: "teste 1 - step 1" })];
-            case 2:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(true, { category: "teste 1", name: "teste 1 - step 2" })];
-            case 3:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(false, { category: "teste 1", name: "teste 1 - step 3" })];
-            case 4:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(false, { category: "teste 2", name: "teste 2 - step 1" })];
-            case 5:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(true, { category: "teste 2", name: "teste 2 - step 2" })];
-            case 6:
-                _a.sent();
-                return [4 /*yield*/, plugin_1.default.postTest(false, { category: "teste 2", name: "teste 2 - step 3" })];
-            case 7:
-                _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}); })();
-module.exports = plugin_1.default;
+Object.defineProperty(exports, "__esModule", { value: true });
+var RepositoryFactory_1 = require("../../repository/factory/RepositoryFactory");
+var BaseService = /** @class */ (function () {
+    function BaseService(entity) {
+        this.entity = entity;
+    }
+    BaseService.prototype.criarEntidadeSeNaoExiste = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var entidadeExistente, _a, entidadeCriado;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, this.entidadeExiste()];
+                    case 1:
+                        entidadeExistente = _b.sent();
+                        _a = this;
+                        return [4 /*yield*/, RepositoryFactory_1.RepositoryFactory.getRepository(this.entity)];
+                    case 2:
+                        _a.repository = _b.sent();
+                        if (!!entidadeExistente) return [3 /*break*/, 4];
+                        return [4 /*yield*/, this.repository.save(this.entity)];
+                    case 3:
+                        entidadeCriado = _b.sent();
+                        return [2 /*return*/, entidadeCriado];
+                    case 4: return [2 /*return*/, entidadeExistente];
+                }
+            });
+        });
+    };
+    BaseService.prototype.entidadeExiste = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, entidadeExiste;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = this;
+                        return [4 /*yield*/, RepositoryFactory_1.RepositoryFactory.getRepository(this.entity)];
+                    case 1:
+                        _a.repository = _b.sent();
+                        return [4 /*yield*/, this.repository.findOne(this.entity)];
+                    case 2:
+                        entidadeExiste = _b.sent();
+                        if (entidadeExiste) {
+                            return [2 /*return*/, entidadeExiste];
+                        }
+                        return [2 /*return*/, false];
+                }
+            });
+        });
+    };
+    return BaseService;
+}());
+exports.BaseService = BaseService;

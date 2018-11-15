@@ -44,19 +44,19 @@ var Step_1 = require("../entity/Step");
 var protractorPg = {
     postTest: function (passed, testInfo) {
         return __awaiter(this, void 0, void 0, function () {
-            var cenarioService, cenario, cenarioCriado, stepService, result, step;
+            var cenario, cenarioService, cenarioCriado, result, step, stepService;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        cenarioService = new CenarioService_1.CenarioService();
                         cenario = new Cenario_1.Cenario(testInfo.category, project_singletom_1.ProjectSingleton.getDefault());
-                        return [4 /*yield*/, cenarioService.criaCenarioseNaoExiste(cenario)];
+                        cenarioService = new CenarioService_1.CenarioService(cenario);
+                        return [4 /*yield*/, cenarioService.criarEntidadeSeNaoExiste()];
                     case 1:
                         cenarioCriado = (_a.sent()) || cenario;
-                        stepService = new StepService_1.StepService();
                         result = passed ? "SIM" : "NAO";
                         step = new Step_1.Step(testInfo.name, result, cenarioCriado);
-                        return [4 /*yield*/, stepService.criaStepseNaoExiste(step)];
+                        stepService = new StepService_1.StepService(step);
+                        return [4 /*yield*/, stepService.criarEntidadeSeNaoExiste()];
                     case 2:
                         _a.sent();
                         return [2 /*return*/];
@@ -66,14 +66,14 @@ var protractorPg = {
     },
     initializer: function (projectName, descricao) {
         return __awaiter(this, void 0, void 0, function () {
-            var projetoService, projeto, _a;
+            var projeto, projetoService, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        projetoService = new ProjetoService_1.ProjetoService();
                         projeto = new Projeto_1.Projeto(projectName, descricao);
+                        projetoService = new ProjetoService_1.ProjetoService(projeto);
                         _a = project_singletom_1.ProjectSingleton;
-                        return [4 /*yield*/, projetoService.criarProjetoSeNaoExiste(projeto)];
+                        return [4 /*yield*/, projetoService.criarEntidadeSeNaoExiste()];
                     case 1:
                         _a.default = (_b.sent()) || projeto;
                         return [2 /*return*/];
