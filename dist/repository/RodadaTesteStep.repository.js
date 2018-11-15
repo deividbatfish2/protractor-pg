@@ -13,12 +13,12 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Base_service_1 = require("./base/Base.service");
-var ProjetoService = /** @class */ (function (_super) {
-    __extends(ProjetoService, _super);
-    function ProjetoService() {
+var Base_repository_1 = require("./base/Base.repository");
+var RodadaTesteStepRepository = /** @class */ (function (_super) {
+    __extends(RodadaTesteStepRepository, _super);
+    function RodadaTesteStepRepository() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    return ProjetoService;
-}(Base_service_1.BaseService));
-exports.ProjetoService = ProjetoService;
+    return RodadaTesteStepRepository;
+}(Base_repository_1.BaseRepository));
+exports.RodadaTesteStepRepository = RodadaTesteStepRepository;

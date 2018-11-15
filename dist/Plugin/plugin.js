@@ -37,27 +37,37 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var Projeto_1 = require("../entity/Projeto");
 var project_singletom_1 = require("../model/project.singletom");
 var Cenario_1 = require("../entity/Cenario");
-var ProjetoService_1 = require("../service/ProjetoService");
-var CenarioService_1 = require("../service/CenarioService");
-var StepService_1 = require("../service/StepService");
+var Projeto_service_1 = require("../service/Projeto.service");
+var Cenario_service_1 = require("../service/Cenario.service");
+var Step_service_1 = require("../service/Step.service");
 var Step_1 = require("../entity/Step");
+var RodadaTeste_1 = require("../entity/RodadaTeste");
+var RodadaTeste_service_1 = require("../service/RodadaTeste.service");
+var rodadaTeste_singletom_1 = require("../model/rodadaTeste.singletom");
+var RodadaTesteStep_1 = require("../entity/RodadaTesteStep");
+var RodadaTesteStep_service_1 = require("../service/RodadaTesteStep.service");
 var protractorPg = {
     postTest: function (passed, testInfo) {
         return __awaiter(this, void 0, void 0, function () {
-            var cenario, cenarioService, cenarioCriado, result, step, stepService;
+            var cenario, cenarioService, cenarioCriado, result, step, stepService, rodadaResult, rodadaResultService;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         cenario = new Cenario_1.Cenario(testInfo.category, project_singletom_1.ProjectSingleton.getDefault());
-                        cenarioService = new CenarioService_1.CenarioService(cenario);
+                        cenarioService = new Cenario_service_1.CenarioService(cenario);
                         return [4 /*yield*/, cenarioService.criarEntidadeSeNaoExiste()];
                     case 1:
                         cenarioCriado = (_a.sent()) || cenario;
                         result = passed ? "SIM" : "NAO";
-                        step = new Step_1.Step(testInfo.name, result, cenarioCriado);
-                        stepService = new StepService_1.StepService(step);
+                        step = new Step_1.Step(testInfo.name, cenarioCriado);
+                        stepService = new Step_service_1.StepService(step);
                         return [4 /*yield*/, stepService.criarEntidadeSeNaoExiste()];
                     case 2:
+                        step = (_a.sent()) || step;
+                        rodadaResult = new RodadaTesteStep_1.RodadaTesteStep(rodadaTeste_singletom_1.RodadaTesteSingleton.getDefault(), step, result);
+                        rodadaResultService = new RodadaTesteStep_service_1.RodadaTesteStepService(rodadaResult);
+                        return [4 /*yield*/, rodadaResultService.criarEntidadeSeNaoExiste()];
+                    case 3:
                         _a.sent();
                         return [2 /*return*/];
                 }
@@ -66,16 +76,22 @@ var protractorPg = {
     },
     initializer: function (projectName, descricao) {
         return __awaiter(this, void 0, void 0, function () {
-            var projeto, projetoService, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var projeto, projetoService, _a, rodadaTeste, rodadaTesteService, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
                         projeto = new Projeto_1.Projeto(projectName, descricao);
-                        projetoService = new ProjetoService_1.ProjetoService(projeto);
+                        projetoService = new Projeto_service_1.ProjetoService(projeto);
                         _a = project_singletom_1.ProjectSingleton;
                         return [4 /*yield*/, projetoService.criarEntidadeSeNaoExiste()];
                     case 1:
-                        _a.default = (_b.sent()) || projeto;
+                        _a.default = (_c.sent()) || projeto;
+                        rodadaTeste = new RodadaTeste_1.RodadaTeste();
+                        rodadaTesteService = new RodadaTeste_service_1.RodadaTesteService(rodadaTeste);
+                        _b = rodadaTeste_singletom_1.RodadaTesteSingleton;
+                        return [4 /*yield*/, rodadaTesteService.criarEntidadeSeNaoExiste()];
+                    case 2:
+                        _b.default = (_c.sent()) || rodadaTeste;
                         return [2 /*return*/];
                 }
             });

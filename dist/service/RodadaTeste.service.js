@@ -14,11 +14,11 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var Base_service_1 = require("./base/Base.service");
-var ProjetoService = /** @class */ (function (_super) {
-    __extends(ProjetoService, _super);
-    function ProjetoService() {
+var RodadaTesteService = /** @class */ (function (_super) {
+    __extends(RodadaTesteService, _super);
+    function RodadaTesteService() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    return ProjetoService;
+    return RodadaTesteService;
 }(Base_service_1.BaseService));
-exports.ProjetoService = ProjetoService;
+exports.RodadaTesteService = RodadaTesteService;

@@ -22,38 +22,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var Cenario_1 = require("./Cenario");
 var BaseEntity_1 = require("./base/BaseEntity");
-var RodadaTesteStep_1 = require("./RodadaTesteStep");
-var Step = /** @class */ (function (_super) {
-    __extends(Step, _super);
-    function Step(descricao, cenario) {
-        var _this = _super.call(this) || this;
-        _this.descricao = descricao;
-        _this.cenario = cenario;
-        return _this;
+var typeorm_1 = require("typeorm");
+var RodadaTeste = /** @class */ (function (_super) {
+    __extends(RodadaTeste, _super);
+    function RodadaTeste() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
-    ], Step.prototype, "id", void 0);
+    ], RodadaTeste.prototype, "id", void 0);
     __decorate([
         typeorm_1.Column(),
-        __metadata("design:type", String)
-    ], Step.prototype, "descricao", void 0);
-    __decorate([
-        typeorm_1.ManyToOne(function (type) { return Cenario_1.Cenario; }, function (cenario) { return cenario.steps; }),
-        __metadata("design:type", Cenario_1.Cenario)
-    ], Step.prototype, "cenario", void 0);
-    __decorate([
-        typeorm_1.OneToMany(function (type) { return RodadaTesteStep_1.RodadaTesteStep; }, function (rodadaTesteStep) { return rodadaTesteStep.step; }),
-        __metadata("design:type", RodadaTesteStep_1.RodadaTesteStep)
-    ], Step.prototype, "rodadaTesteStep", void 0);
-    Step = __decorate([
-        typeorm_1.Entity(),
-        __metadata("design:paramtypes", [String, Cenario_1.Cenario])
-    ], Step);
-    return Step;
+        __metadata("design:type", Date)
+    ], RodadaTeste.prototype, "dataExecucao", void 0);
+    RodadaTeste = __decorate([
+        typeorm_1.Entity()
+    ], RodadaTeste);
+    return RodadaTeste;
 }(BaseEntity_1.BaseEntity));
-exports.Step = Step;
+exports.RodadaTeste = RodadaTeste;

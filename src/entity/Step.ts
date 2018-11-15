@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { Cenario } from "./Cenario";
 import { BaseEntity } from "./base/BaseEntity";
+import { RodadaTesteStep } from "./RodadaTesteStep";
 
 @Entity()
 export class Step extends BaseEntity {
@@ -9,18 +10,17 @@ export class Step extends BaseEntity {
     id: number;
 
     @Column()
-    nome: string;
-
-    @Column()
-    resultado: string;
+    descricao: string;
 
     @ManyToOne(type => Cenario, cenario => cenario.steps)
     cenario: Cenario;
 
-    constructor(nome: string, resultado: string, cenario: Cenario) {
+    @OneToMany(type => RodadaTesteStep, rodadaTesteStep => rodadaTesteStep.step)
+    rodadaTesteStep: RodadaTesteStep
+
+    constructor(descricao: string, cenario: Cenario) {
         super()
-        this.nome = nome;
-        this.resultado = resultado;
+        this.descricao = descricao;
         this.cenario = cenario;
     }
 }

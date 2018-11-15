@@ -22,38 +22,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var Cenario_1 = require("./Cenario");
 var BaseEntity_1 = require("./base/BaseEntity");
-var RodadaTesteStep_1 = require("./RodadaTesteStep");
-var Step = /** @class */ (function (_super) {
-    __extends(Step, _super);
-    function Step(descricao, cenario) {
+var typeorm_1 = require("typeorm");
+var RodadaTeste_1 = require("./RodadaTeste");
+var Step_1 = require("./Step");
+var RodadaTesteStep = /** @class */ (function (_super) {
+    __extends(RodadaTesteStep, _super);
+    function RodadaTesteStep(rodadaDeTeste, step, resultado) {
         var _this = _super.call(this) || this;
-        _this.descricao = descricao;
-        _this.cenario = cenario;
+        _this.rodadaTeste = rodadaDeTeste;
+        _this.step = step;
+        _this.resultado = resultado;
         return _this;
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
-    ], Step.prototype, "id", void 0);
+    ], RodadaTesteStep.prototype, "id", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function (type) { return RodadaTeste_1.RodadaTeste; }, function (rodadaTeste) { return rodadaTeste.rodadaTesteStep; }),
+        __metadata("design:type", RodadaTeste_1.RodadaTeste)
+    ], RodadaTesteStep.prototype, "rodadaTeste", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function (type) { return Step_1.Step; }, function (step) { return step.rodadaTesteStep; }),
+        __metadata("design:type", Step_1.Step)
+    ], RodadaTesteStep.prototype, "step", void 0);
     __decorate([
         typeorm_1.Column(),
         __metadata("design:type", String)
-    ], Step.prototype, "descricao", void 0);
-    __decorate([
-        typeorm_1.ManyToOne(function (type) { return Cenario_1.Cenario; }, function (cenario) { return cenario.steps; }),
-        __metadata("design:type", Cenario_1.Cenario)
-    ], Step.prototype, "cenario", void 0);
-    __decorate([
-        typeorm_1.OneToMany(function (type) { return RodadaTesteStep_1.RodadaTesteStep; }, function (rodadaTesteStep) { return rodadaTesteStep.step; }),
-        __metadata("design:type", RodadaTesteStep_1.RodadaTesteStep)
-    ], Step.prototype, "rodadaTesteStep", void 0);
-    Step = __decorate([
+    ], RodadaTesteStep.prototype, "resultado", void 0);
+    RodadaTesteStep = __decorate([
         typeorm_1.Entity(),
-        __metadata("design:paramtypes", [String, Cenario_1.Cenario])
-    ], Step);
-    return Step;
+        __metadata("design:paramtypes", [RodadaTeste_1.RodadaTeste, Step_1.Step, String])
+    ], RodadaTesteStep);
+    return RodadaTesteStep;
 }(BaseEntity_1.BaseEntity));
-exports.Step = Step;
+exports.RodadaTesteStep = RodadaTesteStep;

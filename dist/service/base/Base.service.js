@@ -35,25 +35,54 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var createDataBase1542130034084 = /** @class */ (function () {
-    function createDataBase1542130034084() {
+var RepositoryFactory_1 = require("../../repository/factory/RepositoryFactory");
+var BaseService = /** @class */ (function () {
+    function BaseService(entity) {
+        this.entity = entity;
     }
-    createDataBase1542130034084.prototype.up = function (queryRunner) {
+    BaseService.prototype.criarEntidadeSeNaoExiste = function () {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                queryRunner.query("\n        CREATE TABLE projeto\n        (\n            \"id\" SERIAL PRIMARY KEY,\n            \"nome\" VARCHAR(100) NOT NULL,\n            \"descricao\" TEXT\n        );\n\n        CREATE TABLE cenario\n        (\n            \"id\" SERIAL PRIMARY KEY,\n            \"descricao\" TEXT NOT NULL,\n            \"projetoId\" INTEGER REFERENCES projeto\n        );\n\n        CREATE TABLE step\n        (\n            \"id\" SERIAL PRIMARY KEY,\n            \"descricao\" TEXT NOT NULL,\n            \"cenarioId\" INTEGER REFERENCES cenario\n        );\n\n        CREATE TABLE rodada_teste\n        (\n            \"id\" SERIAL PRIMARY KEY,\n            \"dataExecucao\" TIMESTAMP NOT NULL\n        );\n\n        CREATE TABLE rodada_teste_step\n        (\n            \"id\" SERIAL PRIMARY KEY,\n            \"rodadaTesteId\" INTEGER REFERENCES rodada_teste,\n            \"stepId\" INTEGER REFERENCES step,\n            \"resultado\" TEXT\n        );\n        ");
-                return [2 /*return*/];
+            var entidadeExistente, _a, entidadeCriado;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, this.entidadeExiste()];
+                    case 1:
+                        entidadeExistente = _b.sent();
+                        _a = this;
+                        return [4 /*yield*/, RepositoryFactory_1.RepositoryFactory.getRepository(this.entity)];
+                    case 2:
+                        _a.repository = _b.sent();
+                        if (!!entidadeExistente) return [3 /*break*/, 4];
+                        return [4 /*yield*/, this.repository.save()];
+                    case 3:
+                        entidadeCriado = _b.sent();
+                        return [2 /*return*/, entidadeCriado];
+                    case 4: return [2 /*return*/, entidadeExistente];
+                }
             });
         });
     };
-    createDataBase1542130034084.prototype.down = function (queryRunner) {
+    BaseService.prototype.entidadeExiste = function () {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                queryRunner.query("\n        DROP TABLE IF EXISTS rodada_teste_step, rodada_teste, step, cenario, projeto CASCADE;\n        ");
-                return [2 /*return*/];
+            var _a, entidadeExiste;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = this;
+                        return [4 /*yield*/, RepositoryFactory_1.RepositoryFactory.getRepository(this.entity)];
+                    case 1:
+                        _a.repository = _b.sent();
+                        return [4 /*yield*/, this.repository.findOne(this.entity)];
+                    case 2:
+                        entidadeExiste = _b.sent();
+                        if (entidadeExiste) {
+                            return [2 /*return*/, entidadeExiste];
+                        }
+                        return [2 /*return*/, false];
+                }
             });
         });
     };
-    return createDataBase1542130034084;
+    return BaseService;
 }());
-exports.createDataBase1542130034084 = createDataBase1542130034084;
+exports.BaseService = BaseService;

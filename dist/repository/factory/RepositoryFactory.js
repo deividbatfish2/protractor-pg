@@ -36,12 +36,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var Projeto_1 = require("../../entity/Projeto");
-var projeto_repository_1 = require("../projeto.repository");
+var Projeto_repository_1 = require("../Projeto.repository");
 var Cenario_1 = require("../../entity/Cenario");
-var cenario_repository_1 = require("../cenario.repository");
+var Cenario_repository_1 = require("../Cenario.repository");
 var Step_1 = require("../../entity/Step");
-var step_repository_1 = require("../step.repository");
+var Step_repository_1 = require("../Step.repository");
 var configConnection_1 = require("../../connection/configConnection");
+var RodadaTeste_1 = require("../../entity/RodadaTeste");
+var RodadaTeste_repository_1 = require("../RodadaTeste.repository");
+var RodadaTesteStep_1 = require("../../entity/RodadaTesteStep");
+var RodadaTesteStep_repository_1 = require("../RodadaTesteStep.repository");
 var RepositoryFactory = /** @class */ (function () {
     function RepositoryFactory() {
     }
@@ -54,11 +58,15 @@ var RepositoryFactory = /** @class */ (function () {
                         _a.sent();
                         switch (entity.constructor) {
                             case Projeto_1.Projeto:
-                                return [2 /*return*/, new projeto_repository_1.ProjetoRepository(entity)];
+                                return [2 /*return*/, new Projeto_repository_1.ProjetoRepository(entity)];
                             case Cenario_1.Cenario:
-                                return [2 /*return*/, new cenario_repository_1.CenarioRepository(entity)];
+                                return [2 /*return*/, new Cenario_repository_1.CenarioRepository(entity)];
                             case Step_1.Step:
-                                return [2 /*return*/, new step_repository_1.StepRepository(entity)];
+                                return [2 /*return*/, new Step_repository_1.StepRepository(entity)];
+                            case RodadaTeste_1.RodadaTeste:
+                                return [2 /*return*/, new RodadaTeste_repository_1.RodadaTesteRepository(entity)];
+                            case RodadaTesteStep_1.RodadaTesteStep:
+                                return [2 /*return*/, new RodadaTesteStep_repository_1.RodadaTesteStepRepository(entity)];
                             default: throw new Error("Entidade não Reconhecida");
                         }
                         return [2 /*return*/];
