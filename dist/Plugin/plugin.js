@@ -59,12 +59,10 @@ var protractorPg = {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("Comecei o post");
                         finalizaRodadaTeste = new FinalizaRodada_1.FinalizaRodada();
                         return [4 /*yield*/, finalizaRodadaTeste.finalizar()];
                     case 1:
                         _a.sent();
-                        console.log("Finalizei o post");
                         return [2 /*return*/];
                 }
             });

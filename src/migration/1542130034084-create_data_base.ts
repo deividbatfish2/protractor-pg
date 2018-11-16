@@ -30,6 +30,7 @@ export class createDataBase1542130034084 implements MigrationInterface {
         CREATE TABLE rodada_teste
         (
             "id" SERIAL PRIMARY KEY,
+            "projeto_id" INTEGER REFERENCES projeto,
             "data_inicio_execucao" TIMESTAMP NOT NULL,
             "data_fim_execucao" TIMESTAMP
         );

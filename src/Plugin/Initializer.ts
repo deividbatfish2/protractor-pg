@@ -24,7 +24,7 @@ export class Initializer {
     }
 
     private async iniciarRodadaDeTeste() {
-        const rodadaTeste = new RodadaTeste();
+        const rodadaTeste = new RodadaTeste(ProjectSingleton.getDefault());
         const rodadaTesteService = new RodadaTesteService(rodadaTeste)
         RodadaTesteSingleton.default = await rodadaTesteService.criarObejetoSeNaoExiste() || rodadaTeste
     }

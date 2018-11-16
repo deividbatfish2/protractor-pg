@@ -84,7 +84,7 @@ var Initializer = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        rodadaTeste = new RodadaTeste_1.RodadaTeste();
+                        rodadaTeste = new RodadaTeste_1.RodadaTeste(project_singletom_1.ProjectSingleton.getDefault());
                         rodadaTesteService = new RodadaTeste_service_1.RodadaTesteService(rodadaTeste);
                         _a = rodadaTeste_singletom_1.RodadaTesteSingleton;
                         return [4 /*yield*/, rodadaTesteService.criarObejetoSeNaoExiste()];

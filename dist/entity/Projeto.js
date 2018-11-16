@@ -25,6 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
 var Cenario_1 = require("./Cenario");
 var BaseEntity_1 = require("./base/BaseEntity");
+var RodadaTeste_1 = require("./RodadaTeste");
 var Projeto = /** @class */ (function (_super) {
     __extends(Projeto, _super);
     function Projeto(nome, descricao) {
@@ -49,6 +50,10 @@ var Projeto = /** @class */ (function (_super) {
         typeorm_1.OneToMany(function (type) { return Cenario_1.Cenario; }, function (cenario) { return cenario.projeto; }),
         __metadata("design:type", Array)
     ], Projeto.prototype, "cenarios", void 0);
+    __decorate([
+        typeorm_1.OneToMany(function (type) { return RodadaTeste_1.RodadaTeste; }, function (rodadaDeTeste) { return rodadaDeTeste.projeto; }),
+        __metadata("design:type", Array)
+    ], Projeto.prototype, "rodadasDeTeste", void 0);
     Projeto = __decorate([
         typeorm_1.Entity(),
         __metadata("design:paramtypes", [String, String])

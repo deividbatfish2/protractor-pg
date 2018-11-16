@@ -25,10 +25,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var BaseEntity_1 = require("./base/BaseEntity");
 var typeorm_1 = require("typeorm");
 var RodadaTesteStep_1 = require("./RodadaTesteStep");
+var Projeto_1 = require("./Projeto");
 var RodadaTeste = /** @class */ (function (_super) {
     __extends(RodadaTeste, _super);
-    function RodadaTeste() {
+    function RodadaTeste(projeto) {
         var _this = _super.call(this) || this;
+        _this.projeto = projeto;
         _this.dataInicioExecucao = new Date();
         return _this;
     }
@@ -45,12 +47,17 @@ var RodadaTeste = /** @class */ (function (_super) {
         __metadata("design:type", Date)
     ], RodadaTeste.prototype, "dataFimExecucao", void 0);
     __decorate([
+        typeorm_1.ManyToOne(function (type) { return Projeto_1.Projeto; }, function (projeto) { return projeto.cenarios; }),
+        typeorm_1.JoinColumn({ name: "projeto_id" }),
+        __metadata("design:type", Projeto_1.Projeto)
+    ], RodadaTeste.prototype, "projeto", void 0);
+    __decorate([
         typeorm_1.OneToMany(function (type) { return RodadaTesteStep_1.RodadaTesteStep; }, function (rodadaTesteStep) { return rodadaTesteStep.rodadaTeste; }),
         __metadata("design:type", RodadaTesteStep_1.RodadaTesteStep)
     ], RodadaTeste.prototype, "rodadaTesteStep", void 0);
     RodadaTeste = __decorate([
         typeorm_1.Entity(),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [Projeto_1.Projeto])
     ], RodadaTeste);
     return RodadaTeste;
 }(BaseEntity_1.BaseEntity));

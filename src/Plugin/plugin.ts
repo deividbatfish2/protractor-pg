@@ -24,10 +24,9 @@ const protractorPg: ProtractorPlugin | any = {
         await criaRodada.gerarRodada();
     },
     async postResults(): Promise<void> {
-        console.log("Comecei o post");
+
         const finalizaRodadaTeste = new FinalizaRodada();
         await finalizaRodadaTeste.finalizar();
-        console.log("Finalizei o post");
     },
     async initializer(projectName: string, descricao: string): Promise<void> {
 
