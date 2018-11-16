@@ -41,10 +41,12 @@ var RodadaTesteStep = /** @class */ (function (_super) {
     ], RodadaTesteStep.prototype, "id", void 0);
     __decorate([
         typeorm_1.ManyToOne(function (type) { return RodadaTeste_1.RodadaTeste; }, function (rodadaTeste) { return rodadaTeste.rodadaTesteStep; }),
+        typeorm_1.JoinColumn({ name: "rodada_teste_id" }),
         __metadata("design:type", RodadaTeste_1.RodadaTeste)
     ], RodadaTesteStep.prototype, "rodadaTeste", void 0);
     __decorate([
         typeorm_1.ManyToOne(function (type) { return Step_1.Step; }, function (step) { return step.rodadaTesteStep; }),
+        typeorm_1.JoinColumn({ name: "step_id" }),
         __metadata("design:type", Step_1.Step)
     ], RodadaTesteStep.prototype, "step", void 0);
     __decorate([

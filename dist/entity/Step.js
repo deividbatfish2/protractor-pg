@@ -44,6 +44,7 @@ var Step = /** @class */ (function (_super) {
     ], Step.prototype, "descricao", void 0);
     __decorate([
         typeorm_1.ManyToOne(function (type) { return Cenario_1.Cenario; }, function (cenario) { return cenario.steps; }),
+        typeorm_1.JoinColumn({ name: "cenario_id" }),
         __metadata("design:type", Cenario_1.Cenario)
     ], Step.prototype, "cenario", void 0);
     __decorate([

@@ -1,6 +1,6 @@
 import { Projeto } from "./Projeto";
 import { Step } from "./Step";
-import { Entity, PrimaryGeneratedColumn, ManyToOne, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, Column, OneToMany, JoinColumn } from "typeorm";
 import { BaseEntity } from "./base/BaseEntity";
 
 @Entity()
@@ -13,6 +13,7 @@ export class Cenario extends BaseEntity {
     descricao: string
 
     @ManyToOne(type => Projeto, projeto => projeto.cenarios)
+    @JoinColumn({ name: "projeto_id" })
     projeto: Projeto;
 
     @OneToMany(type => Step, step => step.cenario)

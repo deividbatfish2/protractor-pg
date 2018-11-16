@@ -1,5 +1,5 @@
 import { BaseEntity } from "./base/BaseEntity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { RodadaTeste } from "./RodadaTeste";
 import { Step } from "./Step";
 
@@ -10,9 +10,11 @@ export class RodadaTesteStep extends BaseEntity {
     id: number;
 
     @ManyToOne(type => RodadaTeste, rodadaTeste => rodadaTeste.rodadaTesteStep)
+    @JoinColumn({name: "rodada_teste_id"})
     rodadaTeste: RodadaTeste
 
     @ManyToOne(type => Step, step => step.rodadaTesteStep)
+    @JoinColumn({name: "step_id"})
     step: Step
 
     @Column()

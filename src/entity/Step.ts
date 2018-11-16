@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from "typeorm";
 import { Cenario } from "./Cenario";
 import { BaseEntity } from "./base/BaseEntity";
 import { RodadaTesteStep } from "./RodadaTesteStep";
@@ -13,6 +13,7 @@ export class Step extends BaseEntity {
     descricao: string;
 
     @ManyToOne(type => Cenario, cenario => cenario.steps)
+    @JoinColumn({name: "cenario_id"})
     cenario: Cenario;
 
     @OneToMany(type => RodadaTesteStep, rodadaTesteStep => rodadaTesteStep.step)

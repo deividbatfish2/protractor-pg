@@ -44,6 +44,7 @@ var Cenario = /** @class */ (function (_super) {
     ], Cenario.prototype, "descricao", void 0);
     __decorate([
         typeorm_1.ManyToOne(function (type) { return Projeto_1.Projeto; }, function (projeto) { return projeto.cenarios; }),
+        typeorm_1.JoinColumn({ name: "projeto_id" }),
         __metadata("design:type", Projeto_1.Projeto)
     ], Cenario.prototype, "projeto", void 0);
     __decorate([
