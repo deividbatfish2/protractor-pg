@@ -57,11 +57,16 @@ var protractorPg = {
         return __awaiter(this, void 0, void 0, function () {
             var finalizaRodadaTeste;
             return __generator(this, function (_a) {
-                console.log("Comecei o post");
-                finalizaRodadaTeste = new FinalizaRodada_1.FinalizaRodada();
-                finalizaRodadaTeste.finalizar();
-                console.log("Finalizei o post");
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        console.log("Comecei o post");
+                        finalizaRodadaTeste = new FinalizaRodada_1.FinalizaRodada();
+                        return [4 /*yield*/, finalizaRodadaTeste.finalizar()];
+                    case 1:
+                        _a.sent();
+                        console.log("Finalizei o post");
+                        return [2 /*return*/];
+                }
             });
         });
     },
