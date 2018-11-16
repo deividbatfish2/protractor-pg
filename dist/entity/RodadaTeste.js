@@ -29,7 +29,7 @@ var RodadaTeste = /** @class */ (function (_super) {
     __extends(RodadaTeste, _super);
     function RodadaTeste() {
         var _this = _super.call(this) || this;
-        _this.dataExecucao = new Date();
+        _this.dataInicioExecucao = new Date();
         return _this;
     }
     __decorate([
@@ -37,9 +37,13 @@ var RodadaTeste = /** @class */ (function (_super) {
         __metadata("design:type", Number)
     ], RodadaTeste.prototype, "id", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column({ name: "data_inicio_execucao" }),
         __metadata("design:type", Date)
-    ], RodadaTeste.prototype, "dataExecucao", void 0);
+    ], RodadaTeste.prototype, "dataInicioExecucao", void 0);
+    __decorate([
+        typeorm_1.Column({ name: "data_fim_execucao" }),
+        __metadata("design:type", Date)
+    ], RodadaTeste.prototype, "dataFimExecucao", void 0);
     __decorate([
         typeorm_1.OneToMany(function (type) { return RodadaTesteStep_1.RodadaTesteStep; }, function (rodadaTesteStep) { return rodadaTesteStep.rodadaTeste; }),
         __metadata("design:type", RodadaTesteStep_1.RodadaTesteStep)

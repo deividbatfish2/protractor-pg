@@ -35,72 +35,66 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var RepositoryFactory_1 = require("../../repository/factory/RepositoryFactory");
-var BaseService = /** @class */ (function () {
-    function BaseService(entity) {
-        this.entity = entity;
+var Projeto_1 = require("../entity/Projeto");
+var Projeto_service_1 = require("../service/Projeto.service");
+var project_singletom_1 = require("../model/project.singletom");
+var RodadaTeste_1 = require("../entity/RodadaTeste");
+var RodadaTeste_service_1 = require("../service/RodadaTeste.service");
+var rodadaTeste_singletom_1 = require("../model/rodadaTeste.singletom");
+var Initializer = /** @class */ (function () {
+    function Initializer(projectName, descricao) {
+        this.projectName = projectName;
+        this.descricao = descricao;
     }
-    BaseService.prototype.criarObejetoSeNaoExiste = function () {
+    Initializer.prototype.inicializarRodadaDeTeste = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var entidadeExistente, _a, entidadeCriado;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0: return [4 /*yield*/, this.entidadeExiste()];
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.inicializarProjetoDeTeste()];
                     case 1:
-                        entidadeExistente = _b.sent();
-                        _a = this;
-                        return [4 /*yield*/, RepositoryFactory_1.RepositoryFactory.getRepository(this.entity)];
+                        _a.sent();
+                        return [4 /*yield*/, this.iniciarRodadaDeTeste()];
                     case 2:
-                        _a.repository = _b.sent();
-                        if (!!entidadeExistente) return [3 /*break*/, 4];
-                        return [4 /*yield*/, this.repository.save()];
-                    case 3:
-                        entidadeCriado = _b.sent();
-                        return [2 /*return*/, entidadeCriado];
-                    case 4: return [2 /*return*/, entidadeExistente];
+                        _a.sent();
+                        return [2 /*return*/];
                 }
             });
         });
     };
-    BaseService.prototype.atualizarObjeto = function () {
+    Initializer.prototype.inicializarProjetoDeTeste = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, entidadeAtualizada;
+            var projeto, projetoService, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _a = this;
-                        return [4 /*yield*/, RepositoryFactory_1.RepositoryFactory.getRepository(this.entity)];
+                        projeto = new Projeto_1.Projeto(this.projectName, this.descricao);
+                        projetoService = new Projeto_service_1.ProjetoService(projeto);
+                        _a = project_singletom_1.ProjectSingleton;
+                        return [4 /*yield*/, projetoService.criarObejetoSeNaoExiste()];
                     case 1:
-                        _a.repository = _b.sent();
-                        return [4 /*yield*/, this.repository.save()];
-                    case 2:
-                        entidadeAtualizada = _b.sent();
-                        return [2 /*return*/, entidadeAtualizada];
+                        _a.default = (_b.sent()) || projeto;
+                        return [2 /*return*/];
                 }
             });
         });
     };
-    BaseService.prototype.entidadeExiste = function () {
+    Initializer.prototype.iniciarRodadaDeTeste = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, entidadeExiste;
+            var rodadaTeste, rodadaTesteService, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _a = this;
-                        return [4 /*yield*/, RepositoryFactory_1.RepositoryFactory.getRepository(this.entity)];
+                        rodadaTeste = new RodadaTeste_1.RodadaTeste();
+                        rodadaTesteService = new RodadaTeste_service_1.RodadaTesteService(rodadaTeste);
+                        _a = rodadaTeste_singletom_1.RodadaTesteSingleton;
+                        return [4 /*yield*/, rodadaTesteService.criarObejetoSeNaoExiste()];
                     case 1:
-                        _a.repository = _b.sent();
-                        return [4 /*yield*/, this.repository.findOne(this.entity)];
-                    case 2:
-                        entidadeExiste = _b.sent();
-                        if (entidadeExiste) {
-                            return [2 /*return*/, entidadeExiste];
-                        }
-                        return [2 /*return*/, false];
+                        _a.default = (_b.sent()) || rodadaTeste;
+                        return [2 /*return*/];
                 }
             });
         });
     };
-    return BaseService;
+    return Initializer;
 }());
-exports.BaseService = BaseService;
+exports.Initializer = Initializer;

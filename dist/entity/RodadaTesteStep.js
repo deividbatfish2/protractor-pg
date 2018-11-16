@@ -26,6 +26,7 @@ var BaseEntity_1 = require("./base/BaseEntity");
 var typeorm_1 = require("typeorm");
 var RodadaTeste_1 = require("./RodadaTeste");
 var Step_1 = require("./Step");
+var ResultadoStep_enum_1 = require("../Plugin/enum/ResultadoStep.enum");
 var RodadaTesteStep = /** @class */ (function (_super) {
     __extends(RodadaTesteStep, _super);
     function RodadaTesteStep(rodadaDeTeste, step, resultado) {

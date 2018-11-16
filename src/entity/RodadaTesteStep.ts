@@ -2,6 +2,7 @@ import { BaseEntity } from "./base/BaseEntity";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { RodadaTeste } from "./RodadaTeste";
 import { Step } from "./Step";
+import { ResultadoStep } from "../Plugin/enum/ResultadoStep.enum";
 
 @Entity()
 export class RodadaTesteStep extends BaseEntity {
@@ -18,9 +19,9 @@ export class RodadaTesteStep extends BaseEntity {
     step: Step
 
     @Column()
-    resultado: string;
+    resultado: ResultadoStep;
 
-    constructor(rodadaDeTeste: RodadaTeste, step: Step, resultado: string) {
+    constructor(rodadaDeTeste: RodadaTeste, step: Step, resultado: ResultadoStep) {
         super()
         this.rodadaTeste = rodadaDeTeste;
         this.step = step;

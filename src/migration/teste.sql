@@ -1,3 +1,5 @@
+CREATE TYPE resultStep AS ENUM ('PASSOU', 'FALHOU');
+
 CREATE TABLE projeto
 (
     "id" SERIAL PRIMARY KEY,
@@ -22,7 +24,8 @@ CREATE TABLE step
 CREATE TABLE rodada_teste
 (
     "id" SERIAL PRIMARY KEY,
-    "dataExecucao" TIMESTAMP NOT NULL
+    "data_inicio_execucao" TIMESTAMP NOT NULL,
+    "data_fim_execucao" TIMESTAMP
 );
 
 CREATE TABLE rodada_teste_step
@@ -30,5 +33,5 @@ CREATE TABLE rodada_teste_step
     "id" SERIAL PRIMARY KEY,
     "rodada_teste_id" INTEGER REFERENCES rodada_teste,
     "step_id" INTEGER REFERENCES step,
-    "resultado" TEXT
+    "resultado" resultStep
 );

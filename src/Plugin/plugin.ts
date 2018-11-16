@@ -12,33 +12,26 @@ import { RodadaTesteService } from '../service/RodadaTeste.service';
 import { RodadaTesteSingleton } from '../model/rodadaTeste.singletom';
 import { RodadaTesteStep } from '../entity/RodadaTesteStep';
 import { RodadaTesteStepService } from '../service/RodadaTesteStep.service';
+import { Initializer } from './Initializer';
+import { CriarRodadaTeste } from './CriarRodadaTeste';
+import { FinalizaRodada } from './FinalizaRodada';
 
 const protractorPg: ProtractorPlugin | any = {
     async postTest(passed: boolean, testInfo: Info): Promise<void> {
 
-        const cenario = new Cenario(testInfo.category, ProjectSingleton.getDefault());
-        const cenarioService = new CenarioService(cenario);
-        const cenarioCriado = await cenarioService.criarEntidadeSeNaoExiste() || cenario;
+        const criaRodada = new CriarRodadaTeste(passed, testInfo);
 
-        const result = passed? "SIM":"NAO";
-        let step = new Step(testInfo.name, cenarioCriado);
-        const stepService = new StepService(step);
-        step = await stepService.criarEntidadeSeNaoExiste() || step;
-
-        const rodadaResult = new RodadaTesteStep(RodadaTesteSingleton.getDefault(), step, result);
-        const rodadaResultService = new RodadaTesteStepService(rodadaResult);
-        await rodadaResultService.criarEntidadeSeNaoExiste();
+        await criaRodada.gerarRodada();
+    },
+    async postResults(): Promise<void> {
+        const finalizaRodadaTeste = new FinalizaRodada();
+        finalizaRodadaTeste.finalizar();
     },
     async initializer(projectName: string, descricao: string): Promise<void> {
 
-        const projeto = new Projeto(projectName, descricao);
-        const projetoService = new ProjetoService(projeto)
-        
-        ProjectSingleton.default = await projetoService.criarEntidadeSeNaoExiste() || projeto;
+        const initializer = new Initializer(projectName, descricao);
 
-        const rodadaTeste = new RodadaTeste();
-        const rodadaTesteService = new RodadaTesteService(rodadaTeste)
-        RodadaTesteSingleton.default = await rodadaTesteService.criarEntidadeSeNaoExiste() || rodadaTeste
+        await initializer.inicializarRodadaDeTeste();
     }
 }
 

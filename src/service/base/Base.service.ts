@@ -3,21 +3,27 @@ import { BaseEntity } from "../../entity/base/BaseEntity";
 import { BaseRepository } from "../../repository/base/Base.repository";
 
 export abstract class BaseService<T extends BaseEntity> {
-    
+
     private repository: any;
 
-    constructor(private entity: T) {}
+    constructor(private entity: T) { }
 
-    async criarEntidadeSeNaoExiste(): Promise<T | undefined> {
+    async criarObejetoSeNaoExiste(): Promise<T | undefined> {
         const entidadeExistente = await this.entidadeExiste();
-        
+
         this.repository = await RepositoryFactory.getRepository(this.entity);
 
-        if(!entidadeExistente) {
-            const entidadeCriado =  await this.repository.save();
+        if (!entidadeExistente) {
+            const entidadeCriado = await this.repository.save();
             return entidadeCriado;
         }
         return <T>entidadeExistente
+    }
+
+    async atualizarObjeto() {
+        this.repository = await RepositoryFactory.getRepository(this.entity);
+        const entidadeAtualizada = await this.repository.save();
+        return entidadeAtualizada;
     }
 
     private async entidadeExiste(): Promise<boolean | T> {
@@ -25,7 +31,7 @@ export abstract class BaseService<T extends BaseEntity> {
         this.repository = await RepositoryFactory.getRepository(this.entity);
 
         const entidadeExiste = await this.repository.findOne(this.entity);
-        if(entidadeExiste) {
+        if (entidadeExiste) {
             return entidadeExiste;
         }
         return false;

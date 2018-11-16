@@ -34,49 +34,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var Initializer_1 = require("./Initializer");
-var CriarRodadaTeste_1 = require("./CriarRodadaTeste");
-var FinalizaRodada_1 = require("./FinalizaRodada");
-var protractorPg = {
-    postTest: function (passed, testInfo) {
-        return __awaiter(this, void 0, void 0, function () {
-            var criaRodada;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        criaRodada = new CriarRodadaTeste_1.CriarRodadaTeste(passed, testInfo);
-                        return [4 /*yield*/, criaRodada.gerarRodada()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    },
-    postResults: function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var finalizaRodadaTeste;
-            return __generator(this, function (_a) {
-                finalizaRodadaTeste = new FinalizaRodada_1.FinalizaRodada();
-                finalizaRodadaTeste.finalizar();
-                return [2 /*return*/];
-            });
-        });
-    },
-    initializer: function (projectName, descricao) {
-        return __awaiter(this, void 0, void 0, function () {
-            var initializer;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        initializer = new Initializer_1.Initializer(projectName, descricao);
-                        return [4 /*yield*/, initializer.inicializarRodadaDeTeste()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
+Object.defineProperty(exports, "__esModule", { value: true });
+var RodadaTeste_service_1 = require("../service/RodadaTeste.service");
+var rodadaTeste_singletom_1 = require("../model/rodadaTeste.singletom");
+var FinalizaRodada = /** @class */ (function () {
+    function FinalizaRodada() {
     }
-};
-module.exports = protractorPg;
+    FinalizaRodada.prototype.finalizar = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var rodadaTeste, rodadaTesteService;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        rodadaTeste = rodadaTeste_singletom_1.RodadaTesteSingleton.getDefault();
+                        rodadaTeste.dataFimExecucao = new Date();
+                        rodadaTesteService = new RodadaTeste_service_1.RodadaTesteService(rodadaTeste);
+                        return [4 /*yield*/, rodadaTesteService.atualizarObjeto()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return FinalizaRodada;
+}());
+exports.FinalizaRodada = FinalizaRodada;
