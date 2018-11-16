@@ -3,6 +3,7 @@ import { RodadaTesteSingleton } from "../model/rodadaTeste.singletom";
 
 export class FinalizaRodada {
     async finalizar(): Promise<void> {
+        
         const rodadaTeste = RodadaTesteSingleton.getDefault();
         rodadaTeste.dataFimExecucao = new Date();
 
